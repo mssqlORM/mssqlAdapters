@@ -1,0 +1,42 @@
+{
+  "name": "mssql-adapters",
+  "version": "0.1.0",
+  "description": "Standalone language adapters for MSSQL ORM - TypeScript, Python, .NET query execution.",
+  "license": "MIT",
+  "main": "typescript/index.js",
+  "types": "typescript/index.d.ts",
+  "exports": {
+    ".": "./typescript/index.js",
+    "./typescript": "./typescript/index.js",
+    "./typescript/*": "./typescript/*",
+    "./python": "./python/mssql_adapter.py",
+    "./dotnet": "./dotnet/MssqlAdapter.cs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mssqlORM/mssqlAdapters.git"
+  },
+  "keywords": ["mssql", "orm", "adapter", "typescript", "python", "dotnet"],
+  "files": [
+    "typescript/**/*.{ts,js,d.ts}",
+    "python/**/*",
+    "dotnet/**/*",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc --noEmit",
+    "test": "node -e \"const fs = require('fs'); const files = ['typescript/mssqlAdapter.ts', 'typescript/index.ts']; files.forEach(f => { if (!fs.existsSync(f)) { console.error('Missing: ' + f); process.exit(1); } }); console.log('All adapter files exist');\" 2>&1",
+    "test:python": "python -m compileall python 2>&1"
+  },
+  "dependencies": {
+    "mssql": "^12.5.5"
+  },
+  "devDependencies": {
+    "@types/mssql": "^9.1.8",
+    "@types/node": "^20.11.0",
+    "typescript": "^6.0.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

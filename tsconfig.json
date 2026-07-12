@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./typescript",
+    "rootDir": "./typescript",
+    "declaration": true,
+    "declarationMap": true,
+    "paths": {
+      "@mssql/client": ["../mssqlClient/typescript"],
+      "@mssql/client/*": ["../mssqlClient/typescript/*"]
+    }
+  },
+  "include": ["typescript/**/*.ts"],
+  "exclude": ["node_modules", "dist", "python", "dotnet", "test"]
+}

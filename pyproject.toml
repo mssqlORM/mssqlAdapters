@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mssql-adapters"
+version = "0.1.0"
+description = "Python adapter helpers for MSSQL ORM."
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [{ name = "mssqlORM" }]
+license = { text = "MIT" }
+keywords = ["mssql", "orm", "adapter"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License"
+]
+dependencies = []
+
+[tool.setuptools]
+py-modules = ["mssql_adapter"]
