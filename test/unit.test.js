@@ -1,5 +1,5 @@
 /**
- * mssqlAdapters Unit Tests
+ * an5Adapters Unit Tests
  * Tests for TypeScript adapter structure and API.
  * Run: node test/unit.test.js
  */
@@ -34,46 +34,46 @@ function assertExists(filePath) {
   }
 }
 
-console.log('\n=== mssqlAdapters Unit Tests ===\n');
+console.log('\n=== an5Adapters Unit Tests ===\n');
 
 // ─── TypeScript Adapter ──────────────────────────────────────────────────────
 
 console.log('TypeScript Adapter:');
 
-test('mssqlAdapter.ts exists', () => {
-  assertExists(path.join(__dirname, '..', 'typescript', 'mssqlAdapter.ts'));
+test('an5Adapter.ts exists', () => {
+  assertExists(path.join(__dirname, '..', 'typescript', 'an5Adapter.ts'));
 });
 
-test('exports MssqlAdapter class', () => {
-  const content = fs.readFileSync(path.join(__dirname, '..', 'typescript', 'mssqlAdapter.ts'), 'utf8');
-  assertIncludes(content, 'export class MssqlAdapter');
-  assertIncludes(content, 'export interface MssqlAdapterConfig');
-  assertIncludes(content, 'export function createMssqlAdapter');
+test('exports An5Adapter class', () => {
+  const content = fs.readFileSync(path.join(__dirname, '..', 'typescript', 'an5Adapter.ts'), 'utf8');
+  assertIncludes(content, 'export class An5Adapter');
+  assertIncludes(content, 'export interface An5AdapterConfig');
+  assertIncludes(content, 'export function createAn5Adapter');
 });
 
-test('MssqlAdapter has exec method', () => {
-  const content = fs.readFileSync(path.join(__dirname, '..', 'typescript', 'mssqlAdapter.ts'), 'utf8');
+test('An5Adapter has exec method', () => {
+  const content = fs.readFileSync(path.join(__dirname, '..', 'typescript', 'an5Adapter.ts'), 'utf8');
   assertIncludes(content, 'async exec<T = any>(query: string');
 });
 
-test('MssqlAdapter has table factory method', () => {
-  const content = fs.readFileSync(path.join(__dirname, '..', 'typescript', 'mssqlAdapter.ts'), 'utf8');
+test('An5Adapter has table factory method', () => {
+  const content = fs.readFileSync(path.join(__dirname, '..', 'typescript', 'an5Adapter.ts'), 'utf8');
   assertIncludes(content, 'table<T = any>(modelName: string)');
 });
 
-test('MssqlAdapter has transaction support', () => {
-  const content = fs.readFileSync(path.join(__dirname, '..', 'typescript', 'mssqlAdapter.ts'), 'utf8');
+test('An5Adapter has transaction support', () => {
+  const content = fs.readFileSync(path.join(__dirname, '..', 'typescript', 'an5Adapter.ts'), 'utf8');
   assertIncludes(content, '$transaction');
 });
 
-test('MssqlAdapter has connect/disconnect', () => {
-  const content = fs.readFileSync(path.join(__dirname, '..', 'typescript', 'mssqlAdapter.ts'), 'utf8');
+test('An5Adapter has connect/disconnect', () => {
+  const content = fs.readFileSync(path.join(__dirname, '..', 'typescript', 'an5Adapter.ts'), 'utf8');
   assertIncludes(content, '$connect');
   assertIncludes(content, '$disconnect');
 });
 
 test('AdapterTableClient has full CRUD', () => {
-  const content = fs.readFileSync(path.join(__dirname, '..', 'typescript', 'mssqlAdapter.ts'), 'utf8');
+  const content = fs.readFileSync(path.join(__dirname, '..', 'typescript', 'an5Adapter.ts'), 'utf8');
   assertIncludes(content, 'async findMany');
   assertIncludes(content, 'async findFirst');
   assertIncludes(content, 'async findUnique');
@@ -85,24 +85,24 @@ test('AdapterTableClient has full CRUD', () => {
 });
 
 test('AdapterTableClient has aggregate and groupBy', () => {
-  const content = fs.readFileSync(path.join(__dirname, '..', 'typescript', 'mssqlAdapter.ts'), 'utf8');
+  const content = fs.readFileSync(path.join(__dirname, '..', 'typescript', 'an5Adapter.ts'), 'utf8');
   assertIncludes(content, 'async aggregate');
   assertIncludes(content, 'async groupBy');
 });
 
 test('AdapterTableClient has vectorSearch', () => {
-  const content = fs.readFileSync(path.join(__dirname, '..', 'typescript', 'mssqlAdapter.ts'), 'utf8');
+  const content = fs.readFileSync(path.join(__dirname, '..', 'typescript', 'an5Adapter.ts'), 'utf8');
   assertIncludes(content, 'async vectorSearch');
 });
 
 test('parseWhere handles OR/AND operators', () => {
-  const content = fs.readFileSync(path.join(__dirname, '..', 'typescript', 'mssqlAdapter.ts'), 'utf8');
+  const content = fs.readFileSync(path.join(__dirname, '..', 'typescript', 'an5Adapter.ts'), 'utf8');
   assertIncludes(content, "key === 'OR'");
   assertIncludes(content, "key === 'AND'");
 });
 
 test('parseWhere handles comparison operators', () => {
-  const content = fs.readFileSync(path.join(__dirname, '..', 'typescript', 'mssqlAdapter.ts'), 'utf8');
+  const content = fs.readFileSync(path.join(__dirname, '..', 'typescript', 'an5Adapter.ts'), 'utf8');
   assertIncludes(content, 'contains');
   assertIncludes(content, 'startsWith');
   assertIncludes(content, 'endsWith');
@@ -115,19 +115,19 @@ test('parseWhere handles comparison operators', () => {
 
 console.log('\nPython Adapter:');
 
-test('mssql_adapter.py exists', () => {
-  assertExists(path.join(__dirname, '..', 'python', 'mssql_adapter.py'));
+test('an5_adapter.py exists', () => {
+  assertExists(path.join(__dirname, '..', 'python', 'an5_adapter.py'));
 });
 
-test('exports MssqlAdapter class', () => {
-  const content = fs.readFileSync(path.join(__dirname, '..', 'python', 'mssql_adapter.py'), 'utf8');
-  assertIncludes(content, 'class MssqlAdapter');
+test('exports An5Adapter class', () => {
+  const content = fs.readFileSync(path.join(__dirname, '..', 'python', 'an5_adapter.py'), 'utf8');
+  assertIncludes(content, 'class An5Adapter');
   assertIncludes(content, 'class AdapterTableClient');
-  assertIncludes(content, 'def create_mssql_adapter');
+  assertIncludes(content, 'def create_an5_adapter');
 });
 
 test('Python adapter has CRUD methods', () => {
-  const content = fs.readFileSync(path.join(__dirname, '..', 'python', 'mssql_adapter.py'), 'utf8');
+  const content = fs.readFileSync(path.join(__dirname, '..', 'python', 'an5_adapter.py'), 'utf8');
   assertIncludes(content, 'def find_many');
   assertIncludes(content, 'def find_first');
   assertIncludes(content, 'def find_unique');
@@ -139,18 +139,18 @@ test('Python adapter has CRUD methods', () => {
 });
 
 test('Python adapter has aggregate and vector_search', () => {
-  const content = fs.readFileSync(path.join(__dirname, '..', 'python', 'mssql_adapter.py'), 'utf8');
+  const content = fs.readFileSync(path.join(__dirname, '..', 'python', 'an5_adapter.py'), 'utf8');
   assertIncludes(content, 'def aggregate');
   assertIncludes(content, 'def vector_search');
 });
 
 test('Python adapter has transaction support', () => {
-  const content = fs.readFileSync(path.join(__dirname, '..', 'python', 'mssql_adapter.py'), 'utf8');
+  const content = fs.readFileSync(path.join(__dirname, '..', 'python', 'an5_adapter.py'), 'utf8');
   assertIncludes(content, 'def transaction');
 });
 
 test('Python adapter parses connection string', () => {
-  const content = fs.readFileSync(path.join(__dirname, '..', 'python', 'mssql_adapter.py'), 'utf8');
+  const content = fs.readFileSync(path.join(__dirname, '..', 'python', 'an5_adapter.py'), 'utf8');
   assertIncludes(content, 'def _parse_connection_string');
 });
 
@@ -158,18 +158,18 @@ test('Python adapter parses connection string', () => {
 
 console.log('\n.NET Adapter:');
 
-test('MssqlAdapter.cs exists', () => {
-  assertExists(path.join(__dirname, '..', 'dotnet', 'MssqlAdapter.cs'));
+test('An5Adapter.cs exists', () => {
+  assertExists(path.join(__dirname, '..', 'dotnet', 'An5Adapter.cs'));
 });
 
-test('.NET adapter has MssqlAdapter class', () => {
-  const content = fs.readFileSync(path.join(__dirname, '..', 'dotnet', 'MssqlAdapter.cs'), 'utf8');
-  assertIncludes(content, 'public class MssqlAdapter');
+test('.NET adapter has An5Adapter class', () => {
+  const content = fs.readFileSync(path.join(__dirname, '..', 'dotnet', 'An5Adapter.cs'), 'utf8');
+  assertIncludes(content, 'public class An5Adapter');
   assertIncludes(content, 'public class AdapterTableClient<T>');
 });
 
 test('.NET adapter has CRUD methods', () => {
-  const content = fs.readFileSync(path.join(__dirname, '..', 'dotnet', 'MssqlAdapter.cs'), 'utf8');
+  const content = fs.readFileSync(path.join(__dirname, '..', 'dotnet', 'An5Adapter.cs'), 'utf8');
   assertIncludes(content, 'FindMany');
   assertIncludes(content, 'FindFirst');
   assertIncludes(content, 'FindUnique');
@@ -181,13 +181,13 @@ test('.NET adapter has CRUD methods', () => {
 });
 
 test('.NET adapter has transaction support', () => {
-  const content = fs.readFileSync(path.join(__dirname, '..', 'dotnet', 'MssqlAdapter.cs'), 'utf8');
+  const content = fs.readFileSync(path.join(__dirname, '..', 'dotnet', 'An5Adapter.cs'), 'utf8');
   assertIncludes(content, 'BeginTransaction');
   assertIncludes(content, 'Transaction<');
 });
 
 test('.NET adapter has VectorSearch', () => {
-  const content = fs.readFileSync(path.join(__dirname, '..', 'dotnet', 'MssqlAdapter.cs'), 'utf8');
+  const content = fs.readFileSync(path.join(__dirname, '..', 'dotnet', 'An5Adapter.cs'), 'utf8');
   assertIncludes(content, 'VectorSearch');
 });
 
@@ -197,7 +197,7 @@ console.log('\nPackage & Config:');
 
 test('package.json is valid', () => {
   const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8'));
-  assertIncludes(pkg.name, 'mssql-adapters');
+  assertIncludes(pkg.name, 'an5-adapters');
   assertIncludes(pkg.description, 'adapters');
 });
 

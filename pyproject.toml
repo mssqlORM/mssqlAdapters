@@ -3,14 +3,14 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mssql-adapters"
+name = "an5-adapters"
 version = "0.1.0"
-description = "Python adapter helpers for MSSQL ORM."
+description = "Python adapter helpers for AN5 ORM."
 readme = "README.md"
 requires-python = ">=3.8"
-authors = [{ name = "mssqlORM" }]
+authors = [{ name = "an5ORM" }]
 license = { text = "MIT" }
-keywords = ["mssql", "orm", "adapter"]
+keywords = ["an5", "orm", "adapter"]
 classifiers = [
   "Programming Language :: Python :: 3",
   "License :: OSI Approved :: MIT License"
@@ -18,4 +18,4 @@ classifiers = [
 dependencies = []
 
 [tool.setuptools]
-py-modules = ["mssql_adapter"]
+py-modules = ["an5_adapter"]

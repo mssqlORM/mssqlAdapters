@@ -1,1 +1,1 @@
-export { MssqlAdapter, AdapterTableClient, createMssqlAdapter, MssqlAdapterConfig } from './mssqlAdapter';
+export { An5Adapter, AdapterTableClient, createAn5Adapter, An5AdapterConfig } from './an5Adapter';

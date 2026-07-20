@@ -1,10 +1,10 @@
-// MssqlAdapter.cs
-// Standalone .NET runtime adapter for MSSQL ORM.
+// An5Adapter.cs
+// Standalone .NET runtime adapter for AN5 ORM.
 // Provides connection, query execution, and typed TableClient<T>.
 // Works independently - no EF Core dependency.
 //
 // Usage:
-//   var db = new MssqlAdapter(connectionString);
+//   var db = new An5Adapter(connectionString);
 //   var users = db.Table<User>("dbo.users").FindMany("IsActive = @p", new { p = true });
 
 using System;
@@ -15,11 +15,11 @@ using System.Text;
 using System.Text.Json;
 using Microsoft.Data.SqlClient;
 
-namespace MssqlOrm
+namespace An5Orm
 {
     // ─── Config ────────────────────────────────────────────────────────────────
 
-    public class MssqlAdapterOptions
+    public class An5AdapterOptions
     {
         public string ConnectionString { get; set; }
         public int CommandTimeout { get; set; } = 60;
@@ -28,7 +28,7 @@ namespace MssqlOrm
 
     // ─── Adapter ────────────────────────────────────────────────────────────────
 
-    public class MssqlAdapter : IDisposable
+    public class An5Adapter : IDisposable
     {
         public string ConnectionString { get; }
         private readonly int _commandTimeout;
@@ -38,13 +38,13 @@ namespace MssqlOrm
         [ThreadStatic]
         private static SqlTransaction _tx;
 
-        public MssqlAdapter(string connectionString, int commandTimeout = 60)
+        public An5Adapter(string connectionString, int commandTimeout = 60)
         {
             ConnectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
             _commandTimeout = commandTimeout;
         }
 
-        public MssqlAdapter(MssqlAdapterOptions options) : this(options.ConnectionString, options.CommandTimeout) { }
+        public An5Adapter(An5AdapterOptions options) : this(options.ConnectionString, options.CommandTimeout) { }
 
         // ── Connection management ──────────────────────────────────────────────
 
@@ -137,17 +137,17 @@ namespace MssqlOrm
 
         // ── Transaction ────────────────────────────────────────────────────────
 
-        public MssqlTransaction BeginTransaction()
+        public An5Transaction BeginTransaction()
         {
             var conn = new SqlConnection(ConnectionString);
             conn.Open();
             var tx = conn.BeginTransaction();
             _txConn = conn;
             _tx = tx;
-            return new MssqlTransaction(conn, tx, () => { _txConn = null; _tx = null; });
+            return new An5Transaction(conn, tx, () => { _txConn = null; _tx = null; });
         }
 
-        public TResult Transaction<TResult>(Func<MssqlAdapter, TResult> fn)
+        public TResult Transaction<TResult>(Func<An5Adapter, TResult> fn)
         {
             using var txScope = BeginTransaction();
             try
@@ -184,10 +184,10 @@ namespace MssqlOrm
 
     public class AdapterTableClient<T> where T : new()
     {
-        private readonly MssqlAdapter _adapter;
+        private readonly An5Adapter _adapter;
         private readonly string _tableName;
 
-        public AdapterTableClient(MssqlAdapter adapter, string tableName)
+        public AdapterTableClient(An5Adapter adapter, string tableName)
         {
             _adapter = adapter;
             _tableName = tableName;

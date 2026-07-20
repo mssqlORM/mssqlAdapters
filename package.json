@@ -1,7 +1,7 @@
 {
-  "name": "mssql-adapters",
+  "name": "an5-adapters",
   "version": "0.1.0",
-  "description": "Standalone language adapters for MSSQL ORM - TypeScript, Python, .NET query execution.",
+  "description": "Standalone language adapters for AN5 ORM - TypeScript, Python, .NET query execution.",
   "license": "MIT",
   "main": "typescript/index.js",
   "types": "typescript/index.d.ts",
@@ -9,14 +9,14 @@
     ".": "./typescript/index.js",
     "./typescript": "./typescript/index.js",
     "./typescript/*": "./typescript/*",
-    "./python": "./python/mssql_adapter.py",
-    "./dotnet": "./dotnet/MssqlAdapter.cs"
+    "./python": "./python/an5_adapter.py",
+    "./dotnet": "./dotnet/An5Adapter.cs"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mssqlORM/mssqlAdapters.git"
+    "url": "https://github.com/an5ORM/an5Adapters.git"
   },
-  "keywords": ["mssql", "orm", "adapter", "typescript", "python", "dotnet"],
+  "keywords": ["an5", "orm", "adapter", "typescript", "python", "dotnet"],
   "files": [
     "typescript/**/*.{ts,js,d.ts}",
     "python/**/*",
@@ -25,7 +25,7 @@
   ],
   "scripts": {
     "build": "tsc --noEmit",
-    "test": "node -e \"const fs = require('fs'); const files = ['typescript/mssqlAdapter.ts', 'typescript/index.ts']; files.forEach(f => { if (!fs.existsSync(f)) { console.error('Missing: ' + f); process.exit(1); } }); console.log('All adapter files exist');\" 2>&1",
+    "test": "node -e \"const fs = require('fs'); const files = ['typescript/an5Adapter.ts', 'typescript/index.ts']; files.forEach(f => { if (!fs.existsSync(f)) { console.error('Missing: ' + f); process.exit(1); } }); console.log('All adapter files exist');\" 2>&1",
     "test:python": "python -m compileall python 2>&1"
   },
   "dependencies": {

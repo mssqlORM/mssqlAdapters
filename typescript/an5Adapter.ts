@@ -1,22 +1,22 @@
 /**
- * mssqlAdapter.ts
- * Standalone TypeScript runtime adapter for MSSQL ORM.
+ * an5Adapter.ts
+ * Standalone TypeScript runtime adapter for AN5 ORM.
  * Provides query execution and table client factory - can be used independently
- * from the main project runtime (mssqlOrm.ts).
+ * from the main project runtime (an5Orm.ts).
  *
  * Usage:
- *   import { createMssqlAdapter } from './mssqlClient/typescript/mssqlAdapter';
- *   const db = createMssqlAdapter({ connectionString: process.env.DATABASE_URL });
+ *   import { createAn5Adapter } from './an5Client/typescript/an5Adapter';
+ *   const db = createAn5Adapter({ connectionString: process.env.DATABASE_URL });
  */
 
 import sql from 'mssql';
 import { randomUUID } from 'crypto';
-import { Mssql } from 'mssql-client/typescript';
-import { modelToTable, relationMap, RelationDef, modelFields } from 'mssql-client/typescript/mssqlMetadata';
+import { An5 } from 'an5-client/typescript';
+import { modelToTable, relationMap, RelationDef, modelFields } from 'an5-client/typescript/an5Metadata';
 
 // ─── Connection Config ────────────────────────────────────────────────────────
 
-export interface MssqlAdapterConfig {
+export interface An5AdapterConfig {
   connectionString: string;
   /** Max pool connections (default: 10) */
   poolMax?: number;
@@ -59,11 +59,11 @@ function parseConnectionString(url: string): sql.config {
 
 // ─── Query Engine ─────────────────────────────────────────────────────────────
 
-export class MssqlAdapter {
+export class An5Adapter {
   private pool: Promise<sql.ConnectionPool> | null = null;
   private config: sql.config;
 
-  constructor(adapterConfig: MssqlAdapterConfig) {
+  constructor(adapterConfig: An5AdapterConfig) {
     this.config = parseConnectionString(adapterConfig.connectionString);
     if (adapterConfig.poolMax) this.config.pool = { ...this.config.pool, max: adapterConfig.poolMax };
     if (adapterConfig.requestTimeout) this.config.requestTimeout = adapterConfig.requestTimeout;
@@ -122,7 +122,7 @@ export class MssqlAdapter {
     }
   }
 
-  async $transaction<R>(fn: (tx: MssqlAdapter) => Promise<R>, options?: { timeout?: number }): Promise<R>;
+  async $transaction<R>(fn: (tx: An5Adapter) => Promise<R>, options?: { timeout?: number }): Promise<R>;
   async $transaction<R>(list: Promise<R>[]): Promise<R[]>;
   async $transaction(fn: any, options?: any): Promise<any> {
     if (typeof fn === 'function') return fn(this);
@@ -216,7 +216,7 @@ function buildOrderBy(orderBy: any): string {
 }
 
 export class AdapterTableClient<T = any> {
-  constructor(private adapter: MssqlAdapter, private modelName: string) {}
+  constructor(private adapter: An5Adapter, private modelName: string) {}
 
   private get tableName(): string {
     const name = this.modelName;
@@ -444,9 +444,9 @@ export class AdapterTableClient<T = any> {
 // ─── Factory ──────────────────────────────────────────────────────────────────
 
 /**
- * Create a typed mssqlAdapter instance from a connection string.
+ * Create a typed an5Adapter instance from a connection string.
  * Returns the adapter with dynamic table access via .table(modelName).
  */
-export function createMssqlAdapter(config: MssqlAdapterConfig): MssqlAdapter {
-  return new MssqlAdapter(config);
+export function createAn5Adapter(config: An5AdapterConfig): An5Adapter {
+  return new An5Adapter(config);
 }

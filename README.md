@@ -1,6 +1,6 @@
-# mssqlAdapters
+# an5Adapters
 
-Standalone runtime adapters for MSSQL ORM. Provides connection pooling, query execution, and typed table clients in TypeScript, Python, and .NET.
+Standalone runtime adapters for AN5 ORM. Provides connection pooling, query execution, and typed table clients in TypeScript, Python, and .NET.
 
 ## Features
 
@@ -16,19 +16,19 @@ Standalone runtime adapters for MSSQL ORM. Provides connection pooling, query ex
 ### TypeScript
 
 ```bash
-npm install mssql-adapters
+npm install an5-adapters
 ```
 
 ### Python
 
 ```bash
-pip install mssql-adapters
+pip install an5-adapters
 ```
 
 ### .NET
 
 ```bash
-dotnet add package MssqlAdapters
+dotnet add package An5Adapters
 ```
 
 ## Usage
@@ -36,9 +36,9 @@ dotnet add package MssqlAdapters
 ### TypeScript
 
 ```typescript
-import { createMssqlAdapter } from 'mssql-adapters';
+import { createAn5Adapter } from 'an5-adapters';
 
-const db = createMssqlAdapter({
+const db = createAn5Adapter({
   connectionString: 'sqlserver://localhost:1433;database=mydb;user=sa;password=pass',
 });
 
@@ -58,9 +58,9 @@ await db.$transaction(async (tx) => {
 ### Python
 
 ```python
-from mssql_adapter import create_mssql_adapter
+from an5_adapter import create_an5_adapter
 
-db = create_mssql_adapter("sqlserver://localhost:1433;database=mydb;user=sa;password=pass")
+db = create_an5_adapter("sqlserver://localhost:1433;database=mydb;user=sa;password=pass")
 
 # Table client
 users = db.table("User")
@@ -76,9 +76,9 @@ db.transaction(lambda tx: tx.table("User").create({"name": "John"}))
 ### .NET
 
 ```csharp
-using MssqlOrm;
+using An5Orm;
 
-var db = new MssqlAdapter(connectionString);
+var db = new An5Adapter(connectionString);
 
 // Table client
 var users = db.Table<User>("dbo.users");
@@ -95,7 +95,7 @@ db.Transaction(tx => {
 
 ## API Reference
 
-### MssqlAdapter
+### An5Adapter
 
 | Method | Description |
 |--------|-------------|

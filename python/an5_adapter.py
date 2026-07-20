@@ -1,11 +1,11 @@
 """
-mssql_adapter.py
-Standalone Python runtime adapter for MSSQL ORM.
+an5_adapter.py
+Standalone Python runtime adapter for AN5 ORM.
 Provides connection pooling, query execution and table client - works independently.
 
 Usage:
-    from mssqlClient.python.mssql_adapter import create_mssql_adapter
-    db = create_mssql_adapter(connection_string=os.environ["DATABASE_URL"])
+    from an5Client.python.an5_adapter import create_an5_adapter
+    db = create_an5_adapter(connection_string=os.environ["DATABASE_URL"])
     users = db.table("User").find_many(where={"is_active": True})
 """
 
@@ -23,12 +23,12 @@ except ImportError:
     _BACKEND = None
 
 import sys, os as _os
-_client_dir = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), '../../mssqlClient/python')
+_client_dir = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), '../../an5Client/python')
 if _client_dir not in sys.path:
     sys.path.insert(0, _client_dir)
 
 try:
-    from mssql_metadata import MODEL_TO_TABLE, MODEL_FIELDS
+    from an5_metadata import MODEL_TO_TABLE, MODEL_FIELDS
     model_to_table = MODEL_TO_TABLE
     model_fields = MODEL_FIELDS
 except ImportError:
@@ -169,7 +169,7 @@ def _build_order_by(order_by: Any) -> str:
 
 # ─── Adapter ─────────────────────────────────────────────────────────────────
 
-class MssqlAdapter:
+class An5Adapter:
     def __init__(self, connection_string: str):
         if not pyodbc:
             raise ImportError(
@@ -231,7 +231,7 @@ class MssqlAdapter:
 # ─── Table Client ─────────────────────────────────────────────────────────────
 
 class AdapterTableClient:
-    def __init__(self, adapter: MssqlAdapter, model_name: str):
+    def __init__(self, adapter: An5Adapter, model_name: str):
         self._adapter = adapter
         self._model = model_name
 
@@ -434,6 +434,6 @@ class AdapterTableClient:
 
 # ─── Factory ─────────────────────────────────────────────────────────────────
 
-def create_mssql_adapter(connection_string: str) -> MssqlAdapter:
-    """Create a standalone MssqlAdapter instance from a connection string."""
-    return MssqlAdapter(connection_string)
+def create_an5_adapter(connection_string: str) -> An5Adapter:
+    """Create a standalone An5Adapter instance from a connection string."""
+    return An5Adapter(connection_string)
